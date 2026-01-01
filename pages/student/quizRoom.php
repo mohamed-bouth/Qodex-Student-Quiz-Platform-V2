@@ -16,49 +16,53 @@ Security::requireStudent();
 $teacherId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
-$_SESSION["count"];
-$_SESSION["quizQuestions"];
-print_r($_SESSION["quizQuestions"][$_SESSION["count"]]);
-$question = $_SESSION["quizQuestions"][$_SESSION["count"]];
+if(isset($_POST['dashboardSubmit'])){
+    $quizId = $_POST['quizId'];
+}
+
 
 ?>
 
 <?php include '../partials/header.php'; ?>
 
 <?php include '../partials/nav_student.php'; ?>
-    <main class="container mx-auto px-4 py-8 max-w-3xl ">
+    <main class="container mx-auto px-4 py-8 max-w-3xl">
+
+        <div style="margin-top: 100px; border: 1px solid rgb(249 250 251 / var(--tw-bg-opacity, 1))" class="" id="errorContainer">
+
+        </div>
         
-        <form action="" method="POST" class="mt-16">
-            <input type="hidden" name="quiz_id" value="15">
+        <form action="" method="POST" class="mt-8">
+            <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $quizId ?>">
 
             <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-sm">Q1</span>
-                    <h3 class="text-lg font-semibold text-gray-900"><?= $question  ?></h3>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-sm">Q</span>
+                    <h3 class="text-lg font-semibold text-gray-900 question"></h3>
                 </div>
                 
                 <div class="space-y-3">
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="a" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                        <span class="ml-3 text-gray-700">Programmation Orientée Objet</span>
+                        <input type="radio" name="q1" value="a" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <span class="ml-3 text-gray-700 q1"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="b" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                        <span class="ml-3 text-gray-700">Protocole Ouvert d'Organisation</span>
+                        <input type="radio" name="q1" value="b" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <span class="ml-3 text-gray-700 q2"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="c" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                        <span class="ml-3 text-gray-700">Programmation Ordinale Organisée</span>
+                        <input type="radio" name="q1" value="c" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <span class="ml-3 text-gray-700 q3"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="d" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
-                        <span class="ml-3 text-gray-700">Aucune de ces réponses</span>
+                        <input type="radio" name="q1" value="d" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <span class="ml-3 text-gray-700 q4"></span>
                     </label>
                 </div>
             </div>
 
             <div class="flex justify-end mt-8">
-                <button type="submit" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-700 shadow-lg transform hover:-translate-y-0.5 transition duration-200">
+                <button id="submitBtn" type="submit" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-700 shadow-lg transform hover:-translate-y-0.5 transition duration-200">
                     Soumettre mes réponses
                 </button>
             </div>
@@ -66,3 +70,4 @@ $question = $_SESSION["quizQuestions"][$_SESSION["count"]];
 
     </main>
     <?php include '../partials/footer.php'; ?>
+    <script src="../../asset/js/quizRoom.js"></script>

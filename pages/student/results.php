@@ -58,10 +58,10 @@ $userName = $_SESSION['user_nom'];
             </div>
 
             <div class="space-y-3">
-                <a href="dashboard.html" class="block w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition">
+                <a href="./dashboard.php" class="block w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition">
                     Retour à l'accueil
                 </a>
-                <a href="history.html" class="block w-full text-indigo-600 font-medium py-3 hover:bg-indigo-50 rounded-lg transition">
+                <a href="./history.php" class="block w-full text-indigo-600 font-medium py-3 hover:bg-indigo-50 rounded-lg transition">
                     Voir mon historique
                 </a>
             </div>
