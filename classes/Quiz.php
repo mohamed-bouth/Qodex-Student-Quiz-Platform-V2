@@ -50,7 +50,6 @@ class Quiz {
     
     // Récupère un quiz par ID
     
-   
     public function getById($id) {
         $sql = "SELECT q.*, c.nom as categorie_nom
                 FROM quiz q
@@ -129,5 +128,22 @@ class Quiz {
         
         $result = $this->db->query($sql, [$quizId]);
         return $result->fetch();
+    }
+
+    public function getAll(){
+        $sql = "SELECT c.nom , q.* , COUNT(qu.question) AS num_questions 
+                FROM categories c 
+                JOIN quiz q ON q.categorie_id = c.id 
+                AND q.is_active = 1
+                JOIN questions qu ON q.id = qu.quiz_id 
+                GROUP BY qu.quiz_id";
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
+    }
+
+    public function getQuestions($quizId) {
+        $sql = "SELECT * FROM quiz q JOIN questions qu ON q.id = qu.quiz_id WHERE q.id = ? ";
+        $result = $this->db->query($sql , [$quizId]);
+        return $result->fetchAll();
     }
 }

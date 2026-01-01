@@ -23,7 +23,7 @@ if (strpos($_SERVER['PHP_SELF'], '/student/') !== false) {
                 <div class="flex-shrink-0 flex items-center">
                     <i class="fas fa-graduation-cap text-3xl text-indigo-600"></i>
                     <span class="ml-2 text-2xl font-bold text-gray-900">Qodex</span>
-                    <span class="ml-3 px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Enseignant</span>
+                    <span class="ml-3 px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">etudiant</span>
                 </div>
                 
                 <!-- Menu Principal -->

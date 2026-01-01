@@ -112,4 +112,10 @@ class Category {
         $result = $this->db->query($sql);
         return $result->fetchAll();
     }
+
+    public function getAllForStudent(){
+        $sql = "SELECT * FROM categories";
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
+    }
 }

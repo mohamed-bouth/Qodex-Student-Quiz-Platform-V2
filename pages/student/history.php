@@ -10,7 +10,7 @@ require_once '../../classes/Security.php';
 require_once '../../classes/Category.php';
 
 // Vérifier que l'utilisateur est enseignant
-
+Security::requireStudent();
 
 // Variables pour la navigation
 $currentPage = 'history';
@@ -75,6 +75,4 @@ $userName = $_SESSION['user_nom'];
 
         </div>
     </main>
-
-</body>
-</html>
+    <?php include '../partials/footer.php'; ?>
