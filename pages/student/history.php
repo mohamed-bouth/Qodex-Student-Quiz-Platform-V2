@@ -8,6 +8,7 @@ require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
 require_once '../../classes/Category.php';
+require_once '../../classes/Result.php';
 
 // Vérifier que l'utilisateur est enseignant
 Security::requireStudent();
@@ -17,13 +18,18 @@ $currentPage = 'history';
 $pageTitle = 'Histories';
 
 // Récupérer les données
-$teacherId = $_SESSION['user_id'];
+$studentId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
 if(isset($_SESSION['quiz_titre'])){
     
     unset($_SESSION['quiz_titre']);
 }
+
+$resultObj = new Result();
+$results = $resultObj->getMyResultsStudent($studentId);
+
+// print_r($results);
 
 ?>
 
@@ -49,30 +55,37 @@ if(isset($_SESSION['quiz_titre'])){
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 text-sm">
-                        
+                        <?php foreach ($results as $result) { ?>
                         <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-medium text-gray-900">Les bases de la POO</td>
-                            <td class="px-6 py-4 text-gray-500">PHP</td>
-                            <td class="px-6 py-4 text-gray-500">29 Dec 2025</td>
+                            <td class="px-6 py-4 font-medium text-gray-900"><?= $result['quiz_titre'] ?></td>
+                            <td class="px-6 py-4 text-gray-500"><?= $result['categorie_nom'] ?></td>
+                            <td class="px-6 py-4 text-gray-500"><?= $result['created_at'] ?></td>
+                            <?php if($result['score'] >= 50) { ?>
                             <td class="px-6 py-4 text-center">
-                                <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-md font-bold">85%</span>
+                                <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-md font-bold"><?= $result['score'] ?>%</span>
                             </td>
                             <td class="px-6 py-4 text-center text-green-600">
-                                <i class="fas fa-check-circle"></i> Terminé
+                                <i class="fas fa-check-circle"></i> réussi
                             </td>
+                            <?php } else { ?>
+                            <td class="px-6 py-4 text-center">
+                                <span class="inline-block px-2 py-1 bg-red-100 text-red-800 rounded-md font-bold"><?= $result['score'] ?>%</span>
+                            </td>
+                            <td class="px-6 py-4 text-center text-red-600">
+                                <i class="fas fa-check-circle"></i> déchu
+                            </td>
+                            <?php } ?>
                         </tr>
-
-                        <tr class="hover:bg-gray-50 transition">
+                        <?php } ?>
+                        <!-- <tr class="hover:bg-gray-50 transition">
                             <td class="px-6 py-4 font-medium text-gray-900">Architecture MVC</td>
                             <td class="px-6 py-4 text-gray-500">Architecture</td>
                             <td class="px-6 py-4 text-gray-500">28 Dec 2025</td>
                             <td class="px-6 py-4 text-center">
                                 <span class="inline-block px-2 py-1 bg-red-100 text-red-800 rounded-md font-bold">40%</span>
                             </td>
-                            <td class="px-6 py-4 text-center text-gray-600">
-                                <i class="fas fa-check-circle"></i> Terminé
-                            </td>
-                        </tr>
+                            
+                        </tr> -->
 
                     </tbody>
                 </table>

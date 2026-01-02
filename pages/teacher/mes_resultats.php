@@ -140,11 +140,11 @@ $mesStats = $resultObj->getMyStats($userId);
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 text-center font-bold">
-                                        <?= $resultat['score'] ?>/<?= $resultat['total_questions'] ?>
+                                        <?= $resultat['score'] * $resultat['total_questions'] / 100 ?>/<?= $resultat['total_questions'] ?>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <span class="px-3 py-1 <?= $colorClass ?> text-sm font-semibold rounded-full">
-                                            <?= round($pourcentage, 1) ?>%
+                                            <?= $resultat['score'] ?>%
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 text-gray-500 text-sm">

@@ -271,3 +271,18 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE `results`
+  ADD COLUMN `enseignant_id` int NOT NULL AFTER `etudiant_id`;
+
+
+ALTER TABLE `results`
+  ADD KEY `idx_enseignant` (`enseignant_id`),
+
+  ADD CONSTRAINT `results_ibfk_3`
+    FOREIGN KEY (`enseignant_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+

@@ -21,4 +21,4 @@ $score = $correctQuestion/$numQuesion*100;
 $quizId = $_SESSION['quizId'] ?? 0;
 
 $resultObj = new Result();
-$resultObj->save($quizId , $studentId , $score , $numQuesion);
+$resultObj->save($quizId , $studentId , 4 , $score , $numQuesion);

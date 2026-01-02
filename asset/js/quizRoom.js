@@ -96,7 +96,6 @@ function loadQuestion() {
                 .then(response => response.text())
                 .then(data => {
                     console.log(data);
-                    // window.location.replace("results.php");
                     window.location.replace("results.php");
                 });
 
