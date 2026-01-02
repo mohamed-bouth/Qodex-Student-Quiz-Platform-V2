@@ -20,6 +20,11 @@ $pageTitle = 'Histories';
 $teacherId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
+if(isset($_SESSION['quiz_titre'])){
+    
+    unset($_SESSION['quiz_titre']);
+}
+
 ?>
 
 <?php include '../partials/header.php'; ?>

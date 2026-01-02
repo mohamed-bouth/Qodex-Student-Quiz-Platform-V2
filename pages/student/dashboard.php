@@ -27,6 +27,11 @@ $categories = $categoryObj->getAllForStudent();
 
 $quizObj = new Quiz();
 $quizes = $quizObj->getAll();
+
+if(isset($_SESSION['quiz_titre'])){
+
+    unset($_SESSION['quiz_titre']);
+}
 ?>
 
 <?php include '../partials/header.php'; ?>

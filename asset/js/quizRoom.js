@@ -8,7 +8,6 @@ const answearInput3 = document.querySelector(".q3");
 const answearInput4 = document.querySelector(".q4");
 const errorContainer = document.querySelector("#errorContainer");
 
-console.log(quizId)
 
 function  affichError() {
     errorContainer.style.marginTop = "50px"
@@ -39,7 +38,45 @@ function resetInput() {
     radioInput.forEach(r => r.checked = false);
 }
 
+numQuestion = 0
+correctQuestion = 0
 
+function countQuestion(globalData) {
+    const answear = document.querySelector(".radioInput:checked").value;
+    if(answear == globalData.correct_option){
+        correctQuestion++;
+        console.log(correctQuestion);
+    }
+
+    numQuestion++;
+}
+
+
+let allAnswers = [];
+
+function saveReponse(globalData) {
+
+    const answear = document.querySelector(".radioInput:checked").value;
+
+
+    const questionData = {
+        question: globalData.question,
+        option1: globalData.option1,
+        option2: globalData.option2,
+        option3: globalData.option3,
+        option4: globalData.option4,
+        correct_option: globalData.correct_option,
+        user_answer: answear
+    };
+
+
+    allAnswers.push(questionData);
+
+    console.log(allAnswers);
+}
+
+
+globalData = null;
 
 function loadQuestion() {
     fetch(`../../studentAction/getQuestion.php?quiz_id=${quizId}&index=${currentIndex}`)
@@ -47,10 +84,23 @@ function loadQuestion() {
         .then(data => {
 
             if (!data || Object.keys(data).length === 0) {
-                window.location.replace("results.php");
+
+                fetch('../../studentAction/saveSession.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body:   'numQuestion=' + encodeURIComponent(numQuestion) +
+                            '&correctQuestion=' + encodeURIComponent(correctQuestion) +
+                            '&allAnswers=' + encodeURIComponent(JSON.stringify(allAnswers))
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    window.location.replace("results.php");
+                });
+
                 return;
             }
-
+            globalData = data
             console.log(data);
             questionInput.textContent = data.question
 
@@ -74,12 +124,19 @@ submitBtn.addEventListener("click" , (e)=> {
     if(result){
         return;
     }
+
+    countQuestion(globalData);
+
+    saveReponse(globalData);
+
     resetInput();
 
 
     currentIndex++;
     loadQuestion();
 })
+
+
 
 
 window.addEventListener("DOMContentLoaded", () => {

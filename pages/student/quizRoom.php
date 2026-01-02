@@ -8,6 +8,7 @@ require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
 require_once '../../classes/Category.php';
+require_once '../../classes/Quiz.php';
 
 // Vérifier que l'utilisateur est enseignant
 Security::requireStudent();
@@ -19,6 +20,10 @@ $userName = $_SESSION['user_nom'];
 if(isset($_POST['dashboardSubmit'])){
     $quizId = $_POST['quizId'];
 }
+
+$quizObj = new Quiz;
+$result = $quizObj->getById($quizId);
+$_SESSION['quiz_titre'] = $result['titre']
 
 
 ?>
@@ -43,19 +48,19 @@ if(isset($_POST['dashboardSubmit'])){
                 
                 <div class="space-y-3">
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="a" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <input type="radio" name="q1" value="1" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
                         <span class="ml-3 text-gray-700 q1"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="b" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <input type="radio" name="q1" value="2" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
                         <span class="ml-3 text-gray-700 q2"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="c" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <input type="radio" name="q1" value="3" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
                         <span class="ml-3 text-gray-700 q3"></span>
                     </label>
                     <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                        <input type="radio" name="q1" value="d" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
+                        <input type="radio" name="q1" value="4" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 radioInput">
                         <span class="ml-3 text-gray-700 q4"></span>
                     </label>
                 </div>
