@@ -9,6 +9,7 @@ require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
 require_once '../../classes/Category.php';
 
+
 // Vérifier que l'utilisateur est enseignant
 Security::requireStudent();
 
@@ -17,7 +18,7 @@ $currentPage = 'resultats';
 $pageTitle = 'Resultats';
 
 // Récupérer les données
-$teacherId = $_SESSION['user_id'];
+$studentId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
 

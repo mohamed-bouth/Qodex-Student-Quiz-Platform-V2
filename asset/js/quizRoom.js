@@ -90,11 +90,13 @@ function loadQuestion() {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body:   'numQuestion=' + encodeURIComponent(numQuestion) +
                             '&correctQuestion=' + encodeURIComponent(correctQuestion) +
-                            '&allAnswers=' + encodeURIComponent(JSON.stringify(allAnswers))
+                            '&allAnswers=' + encodeURIComponent(JSON.stringify(allAnswers)) +
+                            '&quizId=' + encodeURIComponent(quizId)
                 })
                 .then(response => response.text())
                 .then(data => {
                     console.log(data);
+                    // window.location.replace("results.php");
                     window.location.replace("results.php");
                 });
 
