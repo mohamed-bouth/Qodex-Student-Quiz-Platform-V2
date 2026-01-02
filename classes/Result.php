@@ -18,7 +18,19 @@ class Result {
      * @param int $etudiantId - L'ID de l'étudiant
      * @return array - Liste des résultats
      */
-    public function getMyResults($etudiantId) {
+    public function getMyResults($teacherId) {
+        $sql = "SELECT r.*, q.titre as quiz_titre, c.nom as categorie_nom
+                FROM results r
+                LEFT JOIN quiz q ON r.quiz_id = q.id
+                LEFT JOIN categories c ON q.categorie_id = c.id
+                WHERE r.enseignant_id = ?
+                ORDER BY r.created_at DESC";
+        
+        $result = $this->db->query($sql, [$teacherId]);
+        return $result->fetchAll();
+    }
+
+    public function getMyResultsStudent($etudiantId) {
         $sql = "SELECT r.*, q.titre as quiz_titre, c.nom as categorie_nom
                 FROM results r
                 LEFT JOIN quiz q ON r.quiz_id = q.id
@@ -54,12 +66,12 @@ class Result {
      * @param int $totalQuestions
      * @return int|false
      */
-    public function save($quizId, $etudiantId, $score, $totalQuestions) {
-        $sql = "INSERT INTO results (quiz_id, etudiant_id, score, total_questions, created_at) 
-                VALUES (?, ?, ?, ?, NOW())";
+    public function save($quizId, $etudiantId, $enseignant_id , $score, $totalQuestions) {
+        $sql = "INSERT INTO results (quiz_id, etudiant_id , enseignant_id , score, total_questions, created_at) 
+                VALUES (?, ?, ?, ?, ?, NOW())";
         
         try {
-            $this->db->query($sql, [$quizId, $etudiantId, $score, $totalQuestions]);
+            $this->db->query($sql, [$quizId, $etudiantId , $enseignant_id , $score, $totalQuestions]);
             return $this->db->getConnection()->lastInsertId();
         } catch (Exception $e) {
             return false;
@@ -74,10 +86,10 @@ class Result {
     public function getMyStats($etudiantId) {
         $sql = "SELECT 
                     COUNT(*) as total_quiz,
-                    AVG(score / total_questions * 100) as moyenne,
-                    MAX(score / total_questions * 100) as meilleur_score
+                    AVG(score / total_questions ) as moyenne,
+                    MAX(score / total_questions) as meilleur_score
                 FROM results
-                WHERE etudiant_id = ?";
+                WHERE enseignant_id = ?";
         
         $result = $this->db->query($sql, [$etudiantId]);
         return $result->fetch();
