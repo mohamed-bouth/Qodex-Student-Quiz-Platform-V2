@@ -2,6 +2,7 @@ let currentIndex = 0;
 const questionInput = document.querySelector(".question")
 const submitBtn = document.querySelector("#submitBtn")
 const quizId = document.querySelector("#quiz_id").value;
+const teacherId = document.querySelector("#teacher_id").value;
 const answearInput1 = document.querySelector(".q1");
 const answearInput2 = document.querySelector(".q2"); 
 const answearInput3 = document.querySelector(".q3"); 
@@ -91,12 +92,13 @@ function loadQuestion() {
                     body:   'numQuestion=' + encodeURIComponent(numQuestion) +
                             '&correctQuestion=' + encodeURIComponent(correctQuestion) +
                             '&allAnswers=' + encodeURIComponent(JSON.stringify(allAnswers)) +
-                            '&quizId=' + encodeURIComponent(quizId)
+                            '&quizId=' + encodeURIComponent(quizId) +
+                            '&teacherId=' + encodeURIComponent(teacherId)
                 })
                 .then(response => response.text())
                 .then(data => {
                     console.log(data);
-                    window.location.replace("results.php");
+                    window.location.replace("./results.php");
                 });
 
                 return;

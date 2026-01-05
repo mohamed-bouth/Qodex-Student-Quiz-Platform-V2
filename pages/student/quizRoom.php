@@ -19,6 +19,7 @@ $userName = $_SESSION['user_nom'];
 
 if(isset($_POST['dashboardSubmit'])){
     $quizId = $_POST['quizId'];
+    $teacherId = $_POST['teacherId'];
 }
 
 $quizObj = new Quiz;
@@ -39,6 +40,7 @@ $_SESSION['quiz_titre'] = $result['titre']
         
         <form action="" method="POST" class="mt-8">
             <input type="hidden" id="quiz_id" name="quiz_id" value="<?= $quizId ?>">
+            <input type="hidden" id="teacher_id" name="teacher_id" value="<?= $teacherId ?>">
 
             <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
                 <div class="flex items-center gap-3 mb-4">

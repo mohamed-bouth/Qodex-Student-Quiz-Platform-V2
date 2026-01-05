@@ -65,6 +65,7 @@ if(isset($_SESSION['quiz_titre'])){
                 <div class="flex justify-between items-center mt-4">
                     <span class="text-sm text-gray-500"><?= $quiz["num_questions"] ?> questions</span>
                     <form action="./quizRoom.php" method="POST">
+                        <input name= "teacherId" hidden value="<?=  $quiz["enseignant_id"]?>" type="text" >
                         <input name="quizId" hidden value="<?= $quiz["id"] ?>" type="text">
                         <button name="dashboardSubmit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Commencer <i class="fas fa-arrow-right ml-1"></i></button>
                     </form>
